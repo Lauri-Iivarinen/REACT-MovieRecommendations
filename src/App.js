@@ -1,8 +1,9 @@
-import FetchMoviesMUI from "./mui/FetchMoviesMUI";
+//import FetchMoviesMUI from "./mui/FetchMoviesMUI";
 import "./App.css"
 import React from "react";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import {lightBlue, amber} from '@mui/material/colors';
+import TabMUI from "./mui/TabMui";
 //import AuthenticationForm from "./components/AuthenticationForm";
 
 /*
@@ -60,9 +61,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {//<AuthenticationForm />
-      }
-      <FetchMoviesMUI genres={genres} />
+      <TabMUI genres={genres} />
     </ThemeProvider>
   );
 }

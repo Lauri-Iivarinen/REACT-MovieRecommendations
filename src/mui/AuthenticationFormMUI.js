@@ -1,8 +1,11 @@
 import React, {useState} from 'react'
-import AuthenticationCreateNew from './AuthenticationCreateNew';
-import AuthenticationLogin from './AuthenticationLoginMUI';
+import AuthenticationCreateNewMUI from './AuthenticationCreateNewMUI';
+import AuthenticationLoginMUI from './AuthenticationLoginMUI';
+import ClearIcon from '@mui/icons-material/Clear';
 
-function AuthenticationForm() {
+import { Box, Button } from "@mui/material";
+
+function AuthenticationFormMUI() {
 
     const [action, setaction] = useState('')
     
@@ -13,23 +16,34 @@ function AuthenticationForm() {
     //Either returns form to create new account (not secure) or returns form to login to an existing user
     if(action === 'Login'){
         return (
-            <AuthenticationLogin />
+             <Box>
+                <Box>
+                    <Button value="CreateNew" onClick={(e) => changeAction(e)} variant='contained'  color='secondary' >Create new</Button>
+                    <Button value="Login" onClick={(e) => changeAction(e)} variant='contained'  color='secondary' >Login</Button>
+                </Box>
+                <AuthenticationLoginMUI />
+            </Box>
         )
     } else if (action === 'CreateNew') {
         return (
-            <AuthenticationCreateNew />
+            <Box>
+                <Box>
+                    <Button value="CreateNew" onClick={(e) => changeAction(e)} variant='contained'  color='secondary' >Create new</Button>
+                    <Button value="Login" onClick={(e) => changeAction(e)} variant='contained'  color='secondary' >Login</Button>
+                </Box>
+                <AuthenticationCreateNewMUI />
+            </Box>
         )
     } else {
         return (
-            <div>
-                <br></br>
-            <button value="CreateNew" onClick={(e) => changeAction(e)}>New Account</button>
-            <button value="Login" onClick={(e) => changeAction(e)}>Login</button>
-                <br></br>
-        </div>
+            <Box>
+                <Button value="CreateNew" onClick={(e) => changeAction(e)} variant='contained'  color='secondary' >Create new</Button>
+                <Button value="Login" onClick={(e) => changeAction(e)} variant='contained'  color='secondary' >Login</Button>
+            </Box>
         )
+        //<Button onClick={ (e) => clearUser(e) } variant='contained'  color='secondary' startIcon={ <ClearIcon /> }>Clear</Button>
     }
     
 }
 
-export default AuthenticationForm;
+export default AuthenticationFormMUI;
