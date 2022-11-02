@@ -6,6 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { Link, Outlet } from 'react-router-dom';
 
 
 function FetchMoviesMUI(props) {
@@ -103,6 +104,7 @@ function FetchMoviesMUI(props) {
                     </Box>
                 </Paper>
             {/* MAP ALL MOVIES FETCHED FROM API, FILTER WILL BE APPLIED TO SHOW ONLY CORRECT MOVIES*/}
+                <Paper>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
@@ -142,12 +144,18 @@ function FetchMoviesMUI(props) {
                         })}
                         </TableBody>
                         </Table>
-                </TableContainer></Box>
+                </TableContainer>
+                </Paper>
+                <Outlet></Outlet>
+                </Box>
         )
     } else {
         //only returns this if fetchUrl fails
         return (
-            <Box>{errorState}</Box>
+            <Box>
+                {errorState}
+                <Outlet></Outlet>
+            </Box>
         )
     }
 }

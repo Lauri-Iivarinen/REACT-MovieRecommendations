@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 import { Box, Paper, TextField,Button, Typography } from "@mui/material";
 import CreateIcon from '@mui/icons-material/Create';
 import ClearIcon from '@mui/icons-material/Clear';
+import { Outlet } from 'react-router-dom';
 
 
 function AuthenticationCreateNewMUI() {
@@ -66,12 +67,13 @@ function AuthenticationCreateNewMUI() {
                     <Typography><TextField label='Password' name='password' value={user.password} onChange={(e) => updateUser(e)}/></Typography>
                     <Typography><TextField label='Confirm password' name='confirmPassword' value={user.confirmPassword} onChange={(e) => updateUser(e)}/></Typography>
                 </Box>
-                <Box sx={ {textAlign: 'center'} }>
+                <Box sx={ {padding: 2} }>
                     <Button onClick={ (e) => submitUser(e) } variant='contained' sx={ {marginRight:3} } startIcon={ <CreateIcon /> }>Submit</Button>
                     <Button onClick={ (e) => clearUser(e) } variant='contained'  color='secondary' startIcon={ <ClearIcon /> }>Clear</Button>
                 </Box>
             </Paper>
             <Typography>{viesti}</Typography>
+            <Outlet></Outlet>
         </Box>
     )
 }
