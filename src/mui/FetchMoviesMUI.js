@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box,Paper,TextField} from "@mui/material";
+import { Box,Paper,TextField, Typography} from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,6 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Link, Outlet } from 'react-router-dom';
+import getCreds from '../cred/cred';
+
 
 
 function FetchMoviesMUI(props) {
@@ -45,7 +47,8 @@ function FetchMoviesMUI(props) {
             
         return list
     }
-    
+
+
     //get data from movies
     const fetchUrl = async () => {
         try {
@@ -59,15 +62,16 @@ function FetchMoviesMUI(props) {
             
             // repeats fetch as many times as fetchAmount is set
             for (let page = 1; page <= fetchAmount; page++) {
+                const credentials = getCreds()
                 //GENRES
-                //https://api.themoviedb.org/3/genre/movie/list?api_key=cdd53ccaf614ab3b3380de37a6c2a481&language=en-US
+                //https://api.themoviedb.org/3/genre/movie/list?api_key="+credentials+"&language=en-US
                 //TOP RATED
-                //https://api.themoviedb.org/3/movie/top_rated?api_key=cdd53ccaf614ab3b3380de37a6c2a481&language=en-US&page=1
+                //https://api.themoviedb.org/3/movie/top_rated?api_key="+credentials+"&language=en-US&page=1
                 //POPULAR
-                //https://api.themoviedb.org/3/movie/popular?api_key=cdd53ccaf614ab3b3380de37a6c2a481&language=en-US&page=1
+                //https://api.themoviedb.org/3/movie/popular?api_key="+credentials+"&language=en-US&page=1
                 //TRENDING
-                //https://api.themoviedb.org/3/trending/all/day?api_key=cdd53ccaf614ab3b3380de37a6c2a481
-                const connection = await fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=cdd53ccaf614ab3b3380de37a6c2a481&language=en-US&page=" + page)
+                //https://api.themoviedb.org/3/trending/all/day?api_key="+credentials
+                const connection = await fetch("https://api.themoviedb.org/3/movie/top_rated?api_key="+credentials+"&language=en-US&page=" + page)
                 const json = await connection.json()
                 
                 //adds the fetched json list to 'movies' useState
@@ -100,6 +104,7 @@ function FetchMoviesMUI(props) {
         let text = ""
         return (
             <Box>
+                <Typography variant='h2'>Search for the highest rated movies</Typography>
                 <Paper>
                     <Box component='form' sx={{ '& .MuiTextField-root': { marginBottom: 2 }, padding: 2 }}>
                         <TextField label='Search' name='search' onChange={ (e) => changeFilter(e) }/>

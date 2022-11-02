@@ -9,7 +9,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import ListIcon from '@mui/icons-material/List';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, Outlet } from 'react-router-dom';
-import { Card, CardActions, CardContent, Grid, Typography } from '@mui/material';
+import { AppBar, Card, CardActions, CardContent, Grid, Typography } from '@mui/material';
 
 function MenuMUI(){
 
@@ -24,7 +24,8 @@ function MenuMUI(){
 
     return(
         <Box>
-            <IconButton onClick={ handleOpen }><MenuIcon></MenuIcon></IconButton>
+            <AppBar position='float'>
+            <IconButton onMouseEnter={ handleOpen }><MenuIcon color='secondary' sx={{fontSize:40}}></MenuIcon></IconButton>
             <Drawer anchor='top' open={ open } onClick={ handleClose }>
                 <Grid container spacing={4} sx={{padding:2}}>
                     <Grid item>
@@ -49,6 +50,7 @@ function MenuMUI(){
                     </Grid>
                 </Grid>
             </Drawer>
+            </AppBar>
             <Outlet></Outlet>
         </Box>
     )
