@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { Box, Paper, TextField,Button,Typography } from "@mui/material";
 import CreateIcon from '@mui/icons-material/Create';
 import ClearIcon from '@mui/icons-material/Clear';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet,useParams} from 'react-router-dom';
 
-function AuthenticationLoginMUI() {
+//Form used for logging into an existing user, "required" to have all functions aivailable (not secure, noot the point of the project)
+function AuthenticationLoginMUI() { 
     //NOT SECURE, only a placeholder
     const [user, setUser] = useState({
         username: '',
@@ -24,14 +25,19 @@ function AuthenticationLoginMUI() {
             username: '',
             password: '',
         })
+        //check correct login
+        
     }
     
+    //clears out input fields
     const clearUser = (e) => {
         setUser({
             username: '',
             password: '',
         })
     } 
+
+
     return (
         /*
         <TextField label='Paikka' name='paikka' value={ matka.paikka } 
@@ -45,7 +51,7 @@ function AuthenticationLoginMUI() {
                     <Typography><TextField label='Password' name='password' value={user.password} onChange={(e) => updateUser(e)}/></Typography>
                 </Box>
                 <Box sx={ {padding: 2} }>
-                    <Button onClick={ (e) => submitUser(e) } variant='contained' sx={ {marginRight:3} } startIcon={ <CreateIcon /> }>Submit</Button>
+                    <Button onClick={ (e) => submitUser(e) } variant='contained' sx={ {marginRight:3} } startIcon={ <CreateIcon /> } component={Link} to={'../home/' + user.username} >Submit</Button>
                     <Button onClick={ (e) => clearUser(e) } variant='contained'  color='secondary' startIcon={ <ClearIcon /> }>Clear</Button>
                 </Box>
             </Paper>

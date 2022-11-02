@@ -1,17 +1,22 @@
 import React,{useState,useEffect} from "react";
 import { Box, Card, CardContent, CardHeader, CardMedia, Grid, Paper, Typography } from "@mui/material";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet,useParams} from 'react-router-dom';
 import getCreds from "../cred/cred";
 
+//Index page for users who have successfully authenticated
+function AuthenticatedIndexMUI (props){
 
-function AuthenticatedIndexMUI (){
-
+    //user (username/id)
+    let {user} = useParams()
+    
+    //gets credentials for API (saved on pc, not gh)
     const credentials = getCreds()
     //https://api.themoviedb.org/3/movie/popular?api_key="+credentials+"&language=en-US&page=1
     //http://image.tmdb.org/t/p/w500/your_poster_path
 
     const [errorState, setErrorState] = useState("waiting...")
 
+    //Use state used for mapping out movies on return
     const [trendingMovies,setTrendingMovies] = useState([{
         img: "",
         title: "",
@@ -21,6 +26,7 @@ function AuthenticatedIndexMUI (){
 
     let trending = []
 
+    //fetches trending movies and saves five first results
     const fetchUrl = async () =>{
         try{
             const connection = await fetch("https://api.themoviedb.org/3/trending/all/day?api_key="+credentials)
@@ -46,26 +52,32 @@ function AuthenticatedIndexMUI (){
     }
     useEffect(() => { fetchUrl() }, []);
 
+    //if fetch worked correctly
+    if(errorState.length === 0){
+        return(
+            <Box>
+                <Typography sx={{float:'right'}}>Logged in as {user}</Typography>
+                <Typography variant='h4' sx={{marginLeft: 6, marginTop:2}}>Popular movies now:</Typography>
+                <Grid container spacing={3} sx={{margin: 1}}>
+                    {trendingMovies.map(trending =>{
+                        return(
+                            <Grid item key={trending.id}>
+                                <Card  sx={{maxWidth: 200, height:400}}>
+                                    <CardMedia component='img' image={trending.img} height='300' width='120'></CardMedia>
+                                    <CardContent>{trending.title}</CardContent>
+                                </Card>
+                            </Grid>
+                        )
+                    })}
+                </Grid>
+                
+                <Outlet></Outlet>
+            </Box>
+        )
+    } else{
+        return(<Typography>{errorState}</Typography>)
+    }
     
-    return(
-        <Box>
-            <Typography variant='h4' sx={{marginLeft: 6, marginTop:2}}>Popular movies now:</Typography>
-            <Grid container spacing={3} sx={{margin: 1}}>
-                {trendingMovies.map(trending =>{
-                    return(
-                        <Grid item key={trending.id}>
-                            <Card  sx={{maxWidth: 200, height:400}}>
-                                <CardMedia component='img' image={trending.img} height='300' width='120'></CardMedia>
-                                <CardContent>{trending.title}</CardContent>
-                            </Card>
-                        </Grid>
-                    )
-                })}
-            </Grid>
-
-            <Outlet></Outlet>
-        </Box>
-    )
 }
 
 export default AuthenticatedIndexMUI

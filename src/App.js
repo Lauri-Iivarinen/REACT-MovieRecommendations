@@ -11,6 +11,8 @@ import FetchMoviesMUI from "./mui/FetchMoviesMUI";
 import AuthenticationCreateNewMUI from "./mui/AuthenticationCreateNewMUI";
 import AuthenticationLoginMUI from "./mui/AuthenticationLoginMUI";
 import AuthenticatedIndexMUI from "./mui/AuthenticatedIndexMUI";
+import MovieInfoMUI from "./mui/MovieInfoMUI";
+import MyWatchedList from "./mui/MyWatchedList";
 //import AuthenticationForm from "./components/AuthenticationForm";
 
 /*
@@ -51,7 +53,7 @@ function App() {
   Fetched from TMDB API, hard coded to avoid useless fetching, genres will most likely not change too often*/
   const genres = [{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]
 
-
+  //SETS THE THEME FOR THE WEBAPP, (CHANGE FONT ITS BAD)
   const theme = createTheme({
   //primary -> yläpalkki
   palette: {
@@ -62,7 +64,6 @@ function App() {
   },
   typography: {
     fontFamily: "'Silkscreen', cursive;"
-
   }
 });
  /*
@@ -73,7 +74,6 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
     <CssBaseline />
-
     <BrowserRouter>
       <Routes>
         <Route path='/' element={ <MenuMUI /> }>
@@ -81,7 +81,10 @@ function App() {
           <Route path='listaa' element={ <FetchMoviesMUI genres={genres}></FetchMoviesMUI> } />
           <Route path='signup' element={ <AuthenticationCreateNewMUI></AuthenticationCreateNewMUI> } />
           <Route path='login' element={ <AuthenticationLoginMUI></AuthenticationLoginMUI> } />
-          <Route path='home' element={ <AuthenticatedIndexMUI></AuthenticatedIndexMUI> } />
+          <Route path='home/:user' element={ <AuthenticatedIndexMUI></AuthenticatedIndexMUI> } />
+          <Route path='home/:user/watchlist' element={ <MyWatchedList></MyWatchedList> } />
+          <Route path='listaa/:id' element={<MovieInfoMUI></MovieInfoMUI>}></Route>
+          <Route path='addtolist/:id/:title/:img' element={<Typography>Added to watched list</Typography>}></Route>
           <Route path='*' element={ <Typography>Virhe</Typography> } />
         </Route>
       </Routes>

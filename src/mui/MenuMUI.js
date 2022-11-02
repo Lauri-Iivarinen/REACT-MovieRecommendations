@@ -11,16 +11,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link, Outlet } from 'react-router-dom';
 import { AppBar, Card, CardActions, CardContent, Grid, Typography } from '@mui/material';
 
+//Menu tab/function used in every page, needs work
 function MenuMUI(){
 
+    //IF true, menubar will open
     const [open,setOpen] = useState(false);
-
-    const handleOpen = () => {
-        setOpen(true)
-    }
-    const handleClose = () => {
-        setOpen(false)
-    }
+    //opening and closing
+    const handleOpen = () => { setOpen(true)}
+    const handleClose = () => { setOpen(false) }
 
     return(
         <Box>

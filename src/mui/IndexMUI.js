@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import { Link, Outlet } from 'react-router-dom';
 
+//frontpage of the website, aivailable for all users
 function IndexMUI (){
     return(
         <Box>

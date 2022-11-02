@@ -5,7 +5,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Outlet } from 'react-router-dom';
 
-
+//form to create new user
 function AuthenticationCreateNewMUI() {
 
     //NOT SECURE, only a placeholder
@@ -16,7 +16,7 @@ function AuthenticationCreateNewMUI() {
     })
 
     const [viesti, setViesti] = useState('')
-
+    
     const updateUser = (e) => {
         setUser({
             ...user,
@@ -49,6 +49,7 @@ function AuthenticationCreateNewMUI() {
         
     }
     
+    //clears input fields
     const clearUser = (e) => {
         setUser({
             username: '',

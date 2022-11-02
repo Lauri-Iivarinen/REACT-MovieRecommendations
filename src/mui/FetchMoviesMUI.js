@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box,Paper,TextField, Typography} from "@mui/material";
+import { Box,Button,getImageListItemBarUtilityClass,Paper,TextField, Typography} from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,7 +10,7 @@ import { Link, Outlet } from 'react-router-dom';
 import getCreds from '../cred/cred';
 
 
-
+//Should be renamed "list all movies" does what suggested name does
 function FetchMoviesMUI(props) {
     //Display errors
     const [errorState, setErrorState] = useState("Processing...")
@@ -20,10 +20,11 @@ function FetchMoviesMUI(props) {
         id: 0,
         rating: 0,
         genre: [],
+        img: ""
     }])
+
     //for filtering out the end result list
     const [filter, setFilter] = useState("")
-    
     const changeFilter = (e) => {
         setFilter(e.target.value)
     }
@@ -80,7 +81,8 @@ function FetchMoviesMUI(props) {
                         title: json.results[i].title,
                         id: json.results[i].id,
                         rating: json.results[i].vote_average,
-                        genre: getGenres(json.results[i].genre_ids)
+                        genre: getGenres(json.results[i].genre_ids),
+                        img: json.results[i].poster_path
                     })
                 }
             }
@@ -94,7 +96,10 @@ function FetchMoviesMUI(props) {
     //execute fetch when page is loaded
     useEffect(() => { fetchUrl() }, []);
 
-
+    //removes the unneccessary '/' from the start of the image url
+    const getImage = (e) =>{
+        return e.slice(1)
+    }
 
 
     //Return list of movies fetched or error message
@@ -121,6 +126,7 @@ function FetchMoviesMUI(props) {
                             <TableCell> TITLE </TableCell>
                             <TableCell> ID </TableCell>
                             <TableCell> GENRES </TableCell>
+                            <TableCell></TableCell>
                             {/*eslint-disable-next-line*/}
                         </TableRow>
                     </TableHead>
@@ -138,10 +144,12 @@ function FetchMoviesMUI(props) {
                                         return (
                                             <TableRow key={movie.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                                 <TableCell className={text}>{index}</TableCell>
-                                                <TableCell className={text} >{movie.rating}</TableCell>
+                                                <TableCell className={text}>{movie.rating}</TableCell>
                                                 <TableCell className={text}>{movie.title}</TableCell>
                                                 <TableCell className={text}>{movie.id}</TableCell>
                                                 <TableCell className={text}>{movie.genre}</TableCell>
+                                                <TableCell className={text}><Button component={Link} to={''+movie.id}>More info</Button></TableCell>
+                                                <TableCell className={text}><Button component={Link} to={'../addtolist/'+movie.id+'/'+movie.title+'/'+getImage(movie.img)}>Add to watched</Button></TableCell>
                                             </TableRow>
                                         )
                                     } else {
