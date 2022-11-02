@@ -6,7 +6,7 @@ import { Link, Outlet } from 'react-router-dom';
 function IndexMUI (){
     return(
         <Box>
-            <Typography>INDEX PAGE</Typography>
+            <Typography sx={{marginLeft: 5, marginTop: 2}}>INDEX PAGE</Typography>
                 <Card sx={ { maxWidth: 300, margin: 5 } }>
                     <CardHeader title='Authenticate:'></CardHeader>
                     

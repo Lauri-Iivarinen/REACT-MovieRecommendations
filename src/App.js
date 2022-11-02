@@ -3,13 +3,14 @@ import "./App.css"
 import React from "react";
 import { createTheme, CssBaseline, ThemeProvider, Typography } from "@mui/material";
 import {lightBlue, amber} from '@mui/material/colors';
-import TabMUI from "./mui/TabMui";
+//import TabMUI from "./mui/TabMui";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MenuMUI from "./mui/MenuMUI";
 import IndexMUI from "./mui/IndexMUI";
 import FetchMoviesMUI from "./mui/FetchMoviesMUI";
 import AuthenticationCreateNewMUI from "./mui/AuthenticationCreateNewMUI";
 import AuthenticationLoginMUI from "./mui/AuthenticationLoginMUI";
+import AuthenticatedIndexMUI from "./mui/AuthenticatedIndexMUI";
 //import AuthenticationForm from "./components/AuthenticationForm";
 
 /*
@@ -80,6 +81,7 @@ function App() {
           <Route path='listaa' element={ <FetchMoviesMUI genres={genres}></FetchMoviesMUI> } />
           <Route path='signup' element={ <AuthenticationCreateNewMUI></AuthenticationCreateNewMUI> } />
           <Route path='login' element={ <AuthenticationLoginMUI></AuthenticationLoginMUI> } />
+          <Route path='home' element={ <AuthenticatedIndexMUI></AuthenticatedIndexMUI> } />
           <Route path='*' element={ <Typography>Virhe</Typography> } />
         </Route>
       </Routes>

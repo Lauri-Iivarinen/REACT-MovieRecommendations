@@ -1,10 +1,10 @@
-import { AppBar, Box, Tab, Tabs, Toolbar } from "@mui/material";
+import { AppBar, Box, Tab, Tabs, Toolbar, Typography } from "@mui/material";
 import React, { useState } from "react"
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import FetchMoviesMUI from "./FetchMoviesMUI";
 
-import AuthenticationFormMui from "./AuthenticationFormMUI";
+
  
 function TabMUI(props) {
     
@@ -15,7 +15,7 @@ function TabMUI(props) {
     }
 
 
-        
+    /*
     return (
         <Box >
             <AppBar position="float">
@@ -42,6 +42,10 @@ function TabMUI(props) {
             }
         </Box>
     )
+    */
+   return(
+    <Typography></Typography>
+   )
 }
 
 export default TabMUI;

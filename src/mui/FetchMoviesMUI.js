@@ -65,6 +65,8 @@ function FetchMoviesMUI(props) {
                 //https://api.themoviedb.org/3/movie/top_rated?api_key=cdd53ccaf614ab3b3380de37a6c2a481&language=en-US&page=1
                 //POPULAR
                 //https://api.themoviedb.org/3/movie/popular?api_key=cdd53ccaf614ab3b3380de37a6c2a481&language=en-US&page=1
+                //TRENDING
+                //https://api.themoviedb.org/3/trending/all/day?api_key=cdd53ccaf614ab3b3380de37a6c2a481
                 const connection = await fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=cdd53ccaf614ab3b3380de37a6c2a481&language=en-US&page=" + page)
                 const json = await connection.json()
                 
