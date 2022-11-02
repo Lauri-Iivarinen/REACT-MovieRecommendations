@@ -8,6 +8,7 @@ import TabMUI from "./mui/TabMui";
 
 /*
 
+
 --------------APPLICATIION------------------
 
 Meant to create valid movie recommendations based on users previously watched movies.
