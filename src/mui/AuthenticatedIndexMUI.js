@@ -56,7 +56,7 @@ function AuthenticatedIndexMUI (props){
     if(errorState.length === 0){
         return(
             <Box>
-                <Typography sx={{float:'right'}}>Logged in as {user}</Typography>
+                <Typography sx={{float:'right',margin:2}}>Logged in as {user}</Typography>
                 <Typography variant='h4' sx={{marginLeft: 6, marginTop:2}}>Popular movies now:</Typography>
                 <Grid container spacing={3} sx={{margin: 1}}>
                     {trendingMovies.map(trending =>{

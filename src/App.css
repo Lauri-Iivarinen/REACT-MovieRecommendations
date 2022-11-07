@@ -1,21 +1,9 @@
-.movieList {
-  border-style: solid;
-  margin-bottom: 30px;
-}
-
-.movieHeader {
-  text-align: left;
-  padding-right: 5px;
-  padding-left: 5px;
-  border-style: solid;
-}
-
-.movieData {
-  color: rgb(0, 0, 0);
-}
-
 .white {
-  background-color: rgb(210, 210, 210);
+  background-color: rgb(255, 255, 255);
+}
+
+.grey {
+  background-color: rgb(221, 221, 221);
 }
 
 footer {

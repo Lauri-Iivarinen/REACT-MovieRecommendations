@@ -7,7 +7,8 @@ import { Link, Outlet } from 'react-router-dom';
 function IndexMUI (){
     return(
         <Box>
-            <Typography sx={{marginLeft: 5, marginTop: 2}}>INDEX PAGE</Typography>
+            <Typography sx={{ marginLeft: 5, marginTop: 4 }}>Please "login" (not implemented)</Typography>
+            <Typography sx={{marginLeft: 5, marginTop: 4}}>Logging in is required to proceed</Typography>
                 <Card sx={ { maxWidth: 300, margin: 5 } }>
                     <CardHeader title='Authenticate:'></CardHeader>
                     

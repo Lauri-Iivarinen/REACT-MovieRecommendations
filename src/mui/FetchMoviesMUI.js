@@ -109,10 +109,10 @@ function FetchMoviesMUI(props) {
         let text = ""
         return (
             <Box>
-                <Typography variant='h2'>Search for the highest rated movies</Typography>
-                <Paper>
+                <Typography variant='h2'>Browse highest rated movies</Typography>
+                <Paper sx={{ marginTop: 2}}>
                     <Box component='form' sx={{ '& .MuiTextField-root': { marginBottom: 2 }, padding: 2 }}>
-                        <TextField label='Search' name='search' onChange={ (e) => changeFilter(e) }/>
+                        <TextField  label='Search' name='search' onChange={ (e) => changeFilter(e) }/>
                     </Box>
                 </Paper>
             {/* MAP ALL MOVIES FETCHED FROM API, FILTER WILL BE APPLIED TO SHOW ONLY CORRECT MOVIES*/}
@@ -127,6 +127,7 @@ function FetchMoviesMUI(props) {
                             <TableCell> ID </TableCell>
                             <TableCell> GENRES </TableCell>
                             <TableCell></TableCell>
+                            <TableCell></TableCell>
                             {/*eslint-disable-next-line*/}
                         </TableRow>
                     </TableHead>
@@ -137,7 +138,7 @@ function FetchMoviesMUI(props) {
                                         text="grey"
                                     } else {
                                         text="white"
-                                    }
+                                    } 
                                     index++
                                     //Return a single row if title of the movie is found with filter keyword
                                     if (movie.title.toLowerCase().includes(filter.toLowerCase())) {

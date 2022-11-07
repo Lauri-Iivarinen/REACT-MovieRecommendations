@@ -65,12 +65,12 @@ function AuthenticationCreateNewMUI() {
             <Paper>
                 <Box component='form' sx={{ '& .MuiTextField-root': { marginBottom: 2 }, padding: 2 }}>
                     <Typography><TextField label='Username' name='username' value={ user.username } onChange={ (e) => updateUser(e) }/></Typography>
-                    <Typography><TextField label='Password' name='password' value={user.password} onChange={(e) => updateUser(e)}/></Typography>
-                    <Typography><TextField label='Confirm password' name='confirmPassword' value={user.confirmPassword} onChange={(e) => updateUser(e)}/></Typography>
+                    <Typography><TextField label='Password' type='password' name='password' value={user.password} onChange={(e) => updateUser(e)}/></Typography>
+                    <Typography><TextField label='Confirm password' type='password' name='confirmPassword' value={user.confirmPassword} onChange={(e) => updateUser(e)}/></Typography>
                 </Box>
                 <Box sx={ {padding: 2} }>
                     <Button onClick={ (e) => submitUser(e) } variant='contained' sx={ {marginRight:3} } startIcon={ <CreateIcon /> }>Submit</Button>
-                    <Button onClick={ (e) => clearUser(e) } variant='contained'  color='secondary' startIcon={ <ClearIcon /> }>Clear</Button>
+                    <Button onClick={ (e) => clearUser(e) } variant='contained' startIcon={ <ClearIcon /> }>Clear</Button>
                 </Box>
             </Paper>
             <Typography>{viesti}</Typography>

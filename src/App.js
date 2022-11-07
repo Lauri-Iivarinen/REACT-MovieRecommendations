@@ -57,17 +57,17 @@ function App() {
   const theme = createTheme({
   //primary -> yläpalkki
   palette: {
-    primary: { main: lightBlue[500], contrastText: '#FFFFFF' },
-    secondary: {main: amber[300], contrastText: '#FFFFFF'},
+    primary: { main: '#673ab7', contrastText: '#FFFFFF' },
+    secondary: {main: '#FFFFFF', contrastText: '#FFFFFF'},
     text: { primary: '#000000', contrastText: '#FFFFFF'},
     background: {default: '#FFFFFF'}
   },
   typography: {
-    fontFamily: "'Silkscreen', cursive;"
-  }
+    fontFamily: "'Chakra Petch', sans-serif;"
+    },
 });
  /*
- 
+  
 
     <MenuMUI></MenuMUI>
  */
@@ -84,7 +84,7 @@ function App() {
           <Route path='home/:user' element={ <AuthenticatedIndexMUI></AuthenticatedIndexMUI> } />
           <Route path='home/:user/watchlist' element={ <MyWatchedList></MyWatchedList> } />
           <Route path='listaa/:id' element={<MovieInfoMUI></MovieInfoMUI>}></Route>
-          <Route path='addtolist/:id/:title/:img' element={<Typography>Added to watched list</Typography>}></Route>
+            <Route path='addtolist/:id/:title/:img' element={<Typography sx={{textAlign: "center",marginTop:3}}>Added to watched list,<br /> NOT YET IMPLEMENTED</Typography>}></Route>
           <Route path='*' element={ <Typography>Virhe</Typography> } />
         </Route>
       </Routes>
