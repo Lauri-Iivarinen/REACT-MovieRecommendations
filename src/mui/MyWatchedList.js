@@ -8,8 +8,12 @@ import axios from 'axios';
 //USERS PERSONAL WATCHLIST FOR MOVIES THEY HAVE ALREADY SEEN
 function MyWatchedList(){
 
-    const [status,setStatus] = useState('waiting...')
+    //connection status
+    const [status, setStatus] = useState('waiting...')
+    //list of movies in watch history
     const [movies, setMovies] = useState([])
+
+    //can be changed easily
     const host = 'http://localhost:8080/'
 
 
@@ -27,6 +31,7 @@ function MyWatchedList(){
     }
     useEffect(() => { getMovieListFromUser() }, [])
     
+    //TODO add message to confirm deletion/handle error
     const deleteMovie = async (e) => {
         const body = { id: e }
         try {
@@ -37,8 +42,6 @@ function MyWatchedList(){
         }
     }
 
-    //VARIABLE USED FOR MAPPING MOVIES ON RETURN
-    //const movies = getMovieListFromUser()
     if (status.length > 0) {
         return (
             <Typography>{status}</Typography>
@@ -63,6 +66,7 @@ function MyWatchedList(){
                                         <CardContent>
                                             <Typography>Watched: {movie.watched}</Typography>
                                             <Rating name='read-only' defaultValue={movie.rating} precision={0.5} readOnly></Rating>
+
                                             {movie.review.length > 0 &&
                                                 <Typography>Thoughts:<br />{movie.review}</Typography>
                                             }
@@ -74,7 +78,7 @@ function MyWatchedList(){
                     
                     </Grid>
                 </Paper>
-                <Outlet></Outlet>
+            <Outlet></Outlet>
             </Box>
         )
     }

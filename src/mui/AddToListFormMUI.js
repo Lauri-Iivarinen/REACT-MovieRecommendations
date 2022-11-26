@@ -8,10 +8,14 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import DateFnsUtils from '@date-io/date-fns';
 import fiLocale from 'date-fns/locale/fi';
 
+//Form for adding a movie to watchlist, asks user to input watch date, rating and review (optional)
 function AddToListFormMUI(props) {
-    
+
+    //gets movies basic info
     const { id, title, img } = useParams()
+    //connection status
     const [status, setStatus] = useState('')
+
     const [movie, setMovie] = useState({
         id: id,
         title: title,
@@ -22,6 +26,7 @@ function AddToListFormMUI(props) {
     })
     const host = 'http://localhost:8080/'
 
+    //Date
     const changeDate = (e) => {
         setMovie({
             ...movie,
@@ -29,13 +34,14 @@ function AddToListFormMUI(props) {
         })
     }
 
+    //review
     const setReview = (e) => {
         setMovie({
             ...movie,
             review: e.target.value
        })
    }
-
+   //rating (5 star rating with 0.5 precision)
     const setRating = (e) => {
         setMovie({
             ...movie,
@@ -47,6 +53,7 @@ function AddToListFormMUI(props) {
 
         const dateStr = movie.watched.getFullYear() + '-' + (movie.watched.getMonth() + 1) + '-' + movie.watched.getDate()
 
+        //Json to be posted, changes date to correct form
         const postJson = {
             id: movie.id,
             title: movie.title,
@@ -56,6 +63,7 @@ function AddToListFormMUI(props) {
             img: movie.img
         }
 
+        //Post movie to REST
         try {
             const response = await axios.post(host+ 'movies', postJson)
             console.log(response)

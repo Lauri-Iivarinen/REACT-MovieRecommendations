@@ -20,17 +20,13 @@ import AddToListFormMUI from "./mui/AddToListFormMUI";
 Meant to create valid movie recommendations based on users previously watched movies.
 List of movies and their data is collected from TMDB (The Movie Data Base) using their free API
 
-Users can:
--create new account
--login to existing account
+User
 -search for movies
 -add movies to their 'watched' list (database)
 -get recommendations based on their 'watched' list
 
-!!! RIGHT NOW !!!
-app only displays list of movies which can be filtered using keywords, authentication form is already created but not displayed
-<footer> is added to public/index.html to credit TMDB API based on their policies
 
+<footer> is added to public/index.html to credit TMDB API based on their policies
 footer looks like this (image is saved from their website):
 <footer>
   <!--USING THIS API REQUIRES CREDITING THE SOURCE-->
@@ -70,6 +66,7 @@ function App() {
   
 
     <MenuMUI></MenuMUI>
+    TODO change all endpoints to english-_-
  */
   return (
     <ThemeProvider theme={theme}>
