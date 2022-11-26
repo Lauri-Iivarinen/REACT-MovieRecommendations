@@ -1,13 +1,10 @@
 import React,{useState,useEffect} from "react";
-import { Box, Card, CardContent, CardHeader, CardMedia, Grid, Paper, Typography } from "@mui/material";
-import { Link, Outlet,useParams} from 'react-router-dom';
+import { Box, Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import {Outlet} from 'react-router-dom';
 import getCreds from "../cred/cred";
 
 //Index page for users who have successfully authenticated
 function AuthenticatedIndexMUI (props){
-
-    //user (username/id)
-    let {user} = useParams()
     
     //gets credentials for API (saved on pc, not gh)
     const credentials = getCreds()
@@ -50,13 +47,15 @@ function AuthenticatedIndexMUI (props){
             setErrorState("NO CONNECTION")
         }
     }
-    useEffect(() => { fetchUrl() }, []);
+    useEffect(() => {
+        fetchUrl()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     //if fetch worked correctly
     if(errorState.length === 0){
         return(
             <Box>
-                <Typography sx={{float:'right',margin:2}}>Logged in as {user}</Typography>
                 <Typography variant='h4' sx={{marginLeft: 6, marginTop:2}}>Popular movies now:</Typography>
                 <Grid container spacing={3} sx={{margin: 1}}>
                     {trendingMovies.map(trending =>{

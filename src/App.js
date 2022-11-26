@@ -2,17 +2,14 @@
 import "./App.css"
 import React from "react";
 import { createTheme, CssBaseline, ThemeProvider, Typography } from "@mui/material";
-import {lightBlue, amber} from '@mui/material/colors';
 //import TabMUI from "./mui/TabMui";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MenuMUI from "./mui/MenuMUI";
-import IndexMUI from "./mui/IndexMUI";
 import FetchMoviesMUI from "./mui/FetchMoviesMUI";
-import AuthenticationCreateNewMUI from "./mui/AuthenticationCreateNewMUI";
-import AuthenticationLoginMUI from "./mui/AuthenticationLoginMUI";
 import AuthenticatedIndexMUI from "./mui/AuthenticatedIndexMUI";
 import MovieInfoMUI from "./mui/MovieInfoMUI";
 import MyWatchedList from "./mui/MyWatchedList";
+import AddToListFormMUI from "./mui/AddToListFormMUI";
 //import AuthenticationForm from "./components/AuthenticationForm";
 
 /*
@@ -80,14 +77,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={ <MenuMUI /> }>
-          <Route index element={ <IndexMUI></IndexMUI> } />
+          <Route index element={ <AuthenticatedIndexMUI></AuthenticatedIndexMUI>} />
           <Route path='listaa' element={ <FetchMoviesMUI genres={genres}></FetchMoviesMUI> } />
-          <Route path='signup' element={ <AuthenticationCreateNewMUI></AuthenticationCreateNewMUI> } />
-          <Route path='login' element={ <AuthenticationLoginMUI></AuthenticationLoginMUI> } />
-          <Route path='home/:user' element={ <AuthenticatedIndexMUI></AuthenticatedIndexMUI> } />
-          <Route path='home/:user/watchlist' element={ <MyWatchedList></MyWatchedList> } />
+          <Route path='home' element={ <AuthenticatedIndexMUI></AuthenticatedIndexMUI> } />
+          <Route path='home/watchlist' element={ <MyWatchedList></MyWatchedList> } />
           <Route path='listaa/:id' element={<MovieInfoMUI></MovieInfoMUI>}></Route>
-            <Route path='addtolist/:id/:title/:img' element={<Typography sx={{textAlign: "center",marginTop:3}}>Added to watched list,<br /> NOT YET IMPLEMENTED</Typography>}></Route>
+          <Route path='addtolist/:id/:title/:img' element={<AddToListFormMUI></AddToListFormMUI>}></Route>
           <Route path='*' element={ <Typography>Virhe</Typography> } />
         </Route>
       </Routes>

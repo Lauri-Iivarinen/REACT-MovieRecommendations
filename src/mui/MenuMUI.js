@@ -5,16 +5,15 @@ import IconButton from '@mui/material/Button';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import CreateIcon from '@mui/icons-material/Create';
 import ListIcon from '@mui/icons-material/List';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link, Outlet } from 'react-router-dom';
-import { AppBar, Card, CardActions, CardContent, Grid, Typography } from '@mui/material';
+import { Link, Outlet} from 'react-router-dom';
+import { AppBar, Card, CardActions, Grid} from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 
 //Menu tab/function used in every page, needs work
-function MenuMUI(){
-
+function MenuMUI() {
+    
     //IF true, menubar will open
     const [open,setOpen] = useState(false);
     //opening and closing
@@ -23,14 +22,14 @@ function MenuMUI(){
 
     return(
         <Box>
-            <AppBar position='float'>
-            <IconButton onMouseEnter={ handleOpen }><MenuIcon color='secondary' sx={{fontSize:40}}></MenuIcon></IconButton>
+            <AppBar position='static'>
+            <IconButton onClick={ handleOpen }><MenuIcon color='secondary' sx={{fontSize:40}}></MenuIcon></IconButton>
             <Drawer anchor='top' open={ open } onClick={ handleClose }>
                 <Grid container spacing={4} sx={{padding:2}}>
                     <Grid item>
                         <Card sx={{maxWidth: 200}}>
                             <CardActions>
-                                <ListItemButton component={Link} to='/'>
+                                <ListItemButton component={Link} to='home'>
                                     <ListItemIcon><HomeIcon color='primary' /></ListItemIcon>
                                     <ListItemText primary='Etusivu' />
                                 </ListItemButton>
@@ -42,7 +41,17 @@ function MenuMUI(){
                             <CardActions>
                                 <ListItemButton component={Link} to='listaa'>
                                     <ListItemIcon><ListIcon color='primary' /></ListItemIcon>
-                                    <ListItemText primary='Listaa' />
+                                    <ListItemText primary='Browse' />
+                                </ListItemButton>
+                            </CardActions>
+                        </Card>
+                        </Grid>
+                        <Grid item>
+                        <Card sx={{maxWidth: 200}}>
+                            <CardActions>
+                                <ListItemButton component={Link} to="home/watchlist">
+                                    <ListItemIcon><ListIcon color='primary' /></ListItemIcon>
+                                    <ListItemText primary='My list' />
                                 </ListItemButton>
                             </CardActions>
                         </Card>

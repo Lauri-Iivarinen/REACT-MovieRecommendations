@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Box,Button,getImageListItemBarUtilityClass,Paper,TextField, Typography} from "@mui/material";
+import { Box,Button,Paper,TextField, Typography} from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet} from 'react-router-dom';
 import getCreds from '../cred/cred';
 
 
@@ -14,6 +14,7 @@ import getCreds from '../cred/cred';
 function FetchMoviesMUI(props) {
     //Display errors
     const [errorState, setErrorState] = useState("Processing...")
+
     //save all movies
     const [movies, setmovies] = useState([{
         title: '',
@@ -94,7 +95,10 @@ function FetchMoviesMUI(props) {
         }
     }
     //execute fetch when page is loaded
-    useEffect(() => { fetchUrl() }, []);
+    useEffect(() => {
+        fetchUrl()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     //removes the unneccessary '/' from the start of the image url
     const getImage = (e) =>{
@@ -138,7 +142,7 @@ function FetchMoviesMUI(props) {
                                         text="grey"
                                     } else {
                                         text="white"
-                                    } 
+                                    }
                                     index++
                                     //Return a single row if title of the movie is found with filter keyword
                                     if (movie.title.toLowerCase().includes(filter.toLowerCase())) {
@@ -157,6 +161,7 @@ function FetchMoviesMUI(props) {
                                         //reduce index by 1 to keep row colors fixed
                                         index--
                                     }
+                                    return(<Typography></Typography>)
                         })}
                         </TableBody>
                         </Table>

@@ -6,10 +6,11 @@ import getCreds from "../cred/cred";
 //Fetches extra information from a certain movie (with use parameter 'id')
 function MovieInfoMUI(){
 
-    let {id} = useParams()
+        let { id } = useParams()
+        const credentials = getCreds()
 
     //gets API credentials from files
-    const credentials = getCreds()
+
     const [errorState, setErrorState] = useState("waiting")
 
     //used for the return function
@@ -17,21 +18,25 @@ function MovieInfoMUI(){
 
     //https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US
 
+    useEffect(() => {
+        
     //FETCHES THE DATA FROM A SINGLE MOVIE
-    const fetchInfo = async () =>{
-        try{
-            const connection = await fetch('https://api.themoviedb.org/3/movie/'+id+'?api_key='+credentials+'&language=en-US')
-            const json = await connection.json()
+        const fetchInfo = async () => {
+            try{
+                const connection = await fetch('https://api.themoviedb.org/3/movie/'+id+'?api_key='+credentials+'&language=en-US')
+                const json = await connection.json()
 
-            //saves fetched data to useState called movie
-            setMovie(json)
-            //clear errorstate to show page properly
-            setErrorState("")
-        }catch (error){
-            setErrorState("virhe")
+                //saves fetched data to useState called movie
+                setMovie(json)
+                //clear errorstate to show page properly
+                setErrorState("")
+            }catch (error){
+                setErrorState("virhe")
+            }
         }
-    }
-    useEffect(() => { fetchInfo() }, []);
+        fetchInfo()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     
     //ALL FORMATERS CHECK FOR NULL VALUES FROM API CALL
     //Reformats numbers to become easily readable
@@ -61,6 +66,10 @@ function MovieInfoMUI(){
         return 'Length: ' + e
     }
 
+    const getImage = (e) =>{
+        return e.slice(1)
+    }
+
     if(errorState.length===0){
         return(
             <Box>
@@ -83,6 +92,7 @@ function MovieInfoMUI(){
                                 </CardContent>
                                 <CardActions>
                                     <Button component={Link} to='../listaa'>Return</Button>
+                                    <Button component={Link} to={'../addtolist/'+movie.id+'/'+movie.title+'/'+getImage(movie.poster_path)}>Add to watched</Button>
                                 </CardActions>
                             </Card>
                         </Grid>
