@@ -12,9 +12,11 @@ import fiLocale from 'date-fns/locale/fi';
 function AddToListFormMUI(props) {
 
     //gets movies basic info
-    const { id, title, img } = useParams()
+    const { id, title, img, genres } = useParams()
     //connection status
     const [status, setStatus] = useState('')
+
+    //console.log(genres)
 
     const [movie, setMovie] = useState({
         id: id,
@@ -22,7 +24,8 @@ function AddToListFormMUI(props) {
         watched: new Date(),
         rating: 0.0,
         review: "",
-        img: img
+        img: img,
+        genres: genres
     })
     const host = 'http://localhost:8080/'
 
@@ -60,7 +63,8 @@ function AddToListFormMUI(props) {
             watched: dateStr,
             rating: movie.rating,
             review: movie.review,
-            img: movie.img
+            img: movie.img,
+            genres: movie.genres
         }
 
         //Post movie to REST
@@ -73,7 +77,8 @@ function AddToListFormMUI(props) {
                 watched: '',
                 rating: 0.0,
                 review: '',
-                img: img
+                img: img,
+                genres: genres
             })
             setStatus('success')
         } catch (error) {

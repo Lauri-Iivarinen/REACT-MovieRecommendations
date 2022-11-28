@@ -76,6 +76,8 @@ function FetchMoviesMUI(props) {
                 const connection = await fetch("https://api.themoviedb.org/3/movie/top_rated?api_key="+credentials+"&language=en-US&page=" + page)
                 const json = await connection.json()
                 
+                //console.log(json.results[0].genre_ids)
+
                 //adds the fetched json list to 'movies' useState
                 for (let i = 0; i < json.results.length; i++) {
                     list.push({
@@ -83,7 +85,8 @@ function FetchMoviesMUI(props) {
                         id: json.results[i].id,
                         rating: json.results[i].vote_average,
                         genre: getGenres(json.results[i].genre_ids),
-                        img: json.results[i].poster_path
+                        img: json.results[i].poster_path,
+                        genreRaw: json.results[i].genre_ids
                     })
                 }
             }
@@ -154,7 +157,7 @@ function FetchMoviesMUI(props) {
                                                 <TableCell className={text}>{movie.id}</TableCell>
                                                 <TableCell className={text}>{movie.genre}</TableCell>
                                                 <TableCell className={text}><Button component={Link} to={''+movie.id}>More info</Button></TableCell>
-                                                <TableCell className={text}><Button component={Link} to={'../addtolist/'+movie.id+'/'+movie.title+'/'+getImage(movie.img)}>Add to watched</Button></TableCell>
+                                                <TableCell className={text}><Button component={Link} to={'../addtolist/'+movie.id+'/'+movie.title+'/'+getImage(movie.img)+'/'+movie.genreRaw}>Add to watched</Button></TableCell>
                                             </TableRow>
                                         )
                                     } else {

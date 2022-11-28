@@ -31,7 +31,7 @@ function MenuMUI() {
                             <CardActions>
                                 <ListItemButton component={Link} to='home'>
                                     <ListItemIcon><HomeIcon color='primary' /></ListItemIcon>
-                                    <ListItemText primary='Etusivu' />
+                                    <ListItemText primary='Home' />
                                 </ListItemButton>
                             </CardActions>
                         </Card>

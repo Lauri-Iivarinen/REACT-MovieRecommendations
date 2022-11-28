@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import { Box, Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
-import {Outlet} from 'react-router-dom';
+import {Outlet,Link} from 'react-router-dom';
 import getCreds from "../cred/cred";
 
 //Index page for users who have successfully authenticated
@@ -69,7 +69,7 @@ function AuthenticatedIndexMUI (props){
                         )
                     })}
                 </Grid>
-                
+                <Link to="/recommendations">RECOMMENDATIONS</Link>
                 <Outlet></Outlet>
             </Box>
         )

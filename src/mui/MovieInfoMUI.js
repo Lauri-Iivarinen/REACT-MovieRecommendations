@@ -92,7 +92,7 @@ function MovieInfoMUI(){
                                 </CardContent>
                                 <CardActions>
                                     <Button component={Link} to='../listaa'>Return</Button>
-                                    <Button component={Link} to={'../addtolist/'+movie.id+'/'+movie.title+'/'+getImage(movie.poster_path)}>Add to watched</Button>
+                                    <Button component={Link} to={'../addtolist/'+movie.id+'/'+movie.title+'/'+getImage(movie.poster_path)+'/'+movie.genres}>Add to watched</Button>
                                 </CardActions>
                             </Card>
                         </Grid>

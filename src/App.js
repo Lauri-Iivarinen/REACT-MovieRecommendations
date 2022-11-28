@@ -8,8 +8,10 @@ import MenuMUI from "./mui/MenuMUI";
 import FetchMoviesMUI from "./mui/FetchMoviesMUI";
 import AuthenticatedIndexMUI from "./mui/AuthenticatedIndexMUI";
 import MovieInfoMUI from "./mui/MovieInfoMUI";
-import MyWatchedList from "./mui/MyWatchedList";
+//import MyWatchedList from "./mui/MyWatchedList";
 import AddToListFormMUI from "./mui/AddToListFormMUI";
+import MyWatchedTab from "./mui/MyWatchedTab";
+import Recommendations from "./mui/Recommendations";
 //import AuthenticationForm from "./components/AuthenticationForm";
 
 /*
@@ -22,8 +24,15 @@ List of movies and their data is collected from TMDB (The Movie Data Base) using
 
 User
 -search for movies
--add movies to their 'watched' list (database)
+-add movies to their 'watched' list (database) + review them
+-get summary of watch history (most watched genre etc)
 -get recommendations based on their 'watched' list
+
+TODO
+ - add search for movie function if its not found from top rated list
+ - styling
+ - (user identifying) if time
+ - edit function for watch history (can already delete)
 
 
 <footer> is added to public/index.html to credit TMDB API based on their policies
@@ -77,9 +86,10 @@ function App() {
           <Route index element={ <AuthenticatedIndexMUI></AuthenticatedIndexMUI>} />
           <Route path='listaa' element={ <FetchMoviesMUI genres={genres}></FetchMoviesMUI> } />
           <Route path='home' element={ <AuthenticatedIndexMUI></AuthenticatedIndexMUI> } />
-          <Route path='home/watchlist' element={ <MyWatchedList></MyWatchedList> } />
+          <Route path='home/watchlist' element={ <MyWatchedTab genres={genres}></MyWatchedTab> } />
           <Route path='listaa/:id' element={<MovieInfoMUI></MovieInfoMUI>}></Route>
-          <Route path='addtolist/:id/:title/:img' element={<AddToListFormMUI></AddToListFormMUI>}></Route>
+          <Route path='addtolist/:id/:title/:img/:genres' element={<AddToListFormMUI></AddToListFormMUI>}></Route>
+          <Route path='recommendations' element={ <Recommendations></Recommendations>} />
           <Route path='*' element={ <Typography>Virhe</Typography> } />
         </Route>
       </Routes>
