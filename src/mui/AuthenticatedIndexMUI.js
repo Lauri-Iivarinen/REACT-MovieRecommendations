@@ -1,7 +1,8 @@
 import React,{useState,useEffect} from "react";
-import { Box, Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
-import {Outlet,Link} from 'react-router-dom';
+import { Box, Card, CardContent, CardMedia, Fade, Grid, Typography } from "@mui/material";
+import {Outlet} from 'react-router-dom';
 import getCreds from "../cred/cred";
+import Recommendations from "./Recommendations";
 
 //Index page for users who have successfully authenticated
 function AuthenticatedIndexMUI (props){
@@ -12,6 +13,7 @@ function AuthenticatedIndexMUI (props){
     //http://image.tmdb.org/t/p/w500/your_poster_path
 
     const [errorState, setErrorState] = useState("waiting...")
+    const [fade, setFade] = useState(false)
 
     //Use state used for mapping out movies on return
     const [trendingMovies,setTrendingMovies] = useState([{
@@ -49,6 +51,7 @@ function AuthenticatedIndexMUI (props){
     }
     useEffect(() => {
         fetchUrl()
+        setFade(true)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -56,7 +59,9 @@ function AuthenticatedIndexMUI (props){
     if(errorState.length === 0){
         return(
             <Box>
-                <Typography variant='h4' sx={{marginLeft: 6, marginTop:2}}>Popular movies now:</Typography>
+
+                <Typography variant='h4' sx={{ marginLeft: 6, marginTop: 2 }}>Popular movies now:</Typography>
+                <Fade in={fade} style={{ transitionDelay: fade ? '500ms' : '0ms' }}>
                 <Grid container spacing={3} sx={{margin: 1}}>
                     {trendingMovies.map(trending =>{
                         return(
@@ -68,8 +73,9 @@ function AuthenticatedIndexMUI (props){
                             </Grid>
                         )
                     })}
-                </Grid>
-                <Link to="/recommendations">RECOMMENDATIONS</Link>
+                    </Grid>
+                </Fade>
+                <Recommendations></Recommendations>
                 <Outlet></Outlet>
             </Box>
         )

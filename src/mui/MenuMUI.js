@@ -25,7 +25,7 @@ function MenuMUI() {
             <AppBar position='static'>
             <IconButton onClick={ handleOpen }><MenuIcon color='secondary' sx={{fontSize:40}}></MenuIcon></IconButton>
             <Drawer anchor='top' open={ open } onClick={ handleClose }>
-                <Grid container spacing={4} sx={{padding:2}}>
+                <Grid container spacing={4} sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 2}}>
                     <Grid item>
                         <Card sx={{maxWidth: 200}}>
                             <CardActions>

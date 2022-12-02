@@ -8,25 +8,35 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import DateFnsUtils from '@date-io/date-fns';
 import fiLocale from 'date-fns/locale/fi';
 
-//Form for adding a movie to watchlist, asks user to input watch date, rating and review (optional)
-function AddToListFormMUI(props) {
+//Form for editing an already existing (in watch history) movie
+function EditMovie(props) {
 
     //gets movies basic info
-    const { id, title, img, genres } = useParams()
+    const { id, title, img, genres,year,month,date,rating, review  } = useParams()
     //connection status
     const [status, setStatus] = useState('')
+
+    //change date from useParam form to Date class
+    const setDate = (year, month, date) => {
+        let day = new Date()
+        day.setDate(date)
+        day.setMonth(month)
+        day.setFullYear(year)
+        return day
+    }
 
     //console.log(genres)
     const [movie, setMovie] = useState({
         id: id,
         title: title,
-        watched: new Date(),
-        rating: 0.0,
-        review: "",
+        watched: setDate(year,month,date),
+        rating: parseFloat(rating),
+        review: review,
         img: img,
         genres: genres
     })
     const host = 'http://localhost:8080/'
+
 
 
     //Date
@@ -36,6 +46,7 @@ function AddToListFormMUI(props) {
             watched: e
         })
     }
+
 
     //review
     const setReview = (e) => {
@@ -67,9 +78,9 @@ function AddToListFormMUI(props) {
             genres: movie.genres
         }
 
-        //Post movie to REST
+        //Post (PUT) movie to REST
         try {
-            const response = await axios.post(host+ 'movies', postJson)
+            const response = await axios.put(host+ 'movies', postJson)
             console.log(response)
             setMovie({
                 id: id,
@@ -122,4 +133,4 @@ function AddToListFormMUI(props) {
     )
 }
 
-export default AddToListFormMUI
+export default EditMovie;

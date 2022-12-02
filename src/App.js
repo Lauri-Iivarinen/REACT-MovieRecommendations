@@ -12,6 +12,7 @@ import MovieInfoMUI from "./mui/MovieInfoMUI";
 import AddToListFormMUI from "./mui/AddToListFormMUI";
 import MyWatchedTab from "./mui/MyWatchedTab";
 import Recommendations from "./mui/Recommendations";
+import EditMovie from "./mui/EditMovie";
 //import AuthenticationForm from "./components/AuthenticationForm";
 
 /*
@@ -89,6 +90,7 @@ function App() {
           <Route path='home/watchlist' element={ <MyWatchedTab genres={genres}></MyWatchedTab> } />
           <Route path='listaa/:id' element={<MovieInfoMUI></MovieInfoMUI>}></Route>
           <Route path='addtolist/:id/:title/:img/:genres' element={<AddToListFormMUI></AddToListFormMUI>}></Route>
+          <Route path='addtolist/:id/:title/:img/:genres/:year/:month/:date/:rating/:review' element={<EditMovie></EditMovie>}></Route>
           <Route path='recommendations' element={ <Recommendations></Recommendations>} />
           <Route path='*' element={ <Typography>Virhe</Typography> } />
         </Route>

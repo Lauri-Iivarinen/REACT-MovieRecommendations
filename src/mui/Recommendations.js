@@ -7,7 +7,7 @@ import DisplayRecommendations from './DisplayRecommendations'
 
 function Recommendations() {
     const [status, setStatus] = useState('waiting')
-    const [id,setId] = useState(0)
+    const [id, setId] = useState(0)
     const local = 'http://localhost:8080/'
 
     //find 3 of the users most rated movies
@@ -52,11 +52,3 @@ function Recommendations() {
 }
 
 export default Recommendations
-
-/*
-                {recommended.map(movie => {
-                    return (
-                        <Typography>{movie.id}</Typography>
-                    )
-                })}
-*/

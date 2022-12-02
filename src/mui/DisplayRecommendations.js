@@ -122,8 +122,8 @@ function DisplayRecommendations(props) {
                 <Typography variant="h3">Based on your watch history you may be interested in these:</Typography>
                 {movies.map(movie => {
                     return (
-                        <Zoom in={fade} style={{ transitionDelay: fade ? '500ms' : '0ms' }}>
-                        <Grid container spacing={2} sx={{marginTop:3}} key={movie.id}>
+                        <Zoom in={fade} style={{ transitionDelay: fade ? '500ms' : '0ms' }} key={movie.id}>
+                        <Grid container spacing={2} sx={{marginTop:3}}>
                             <Grid item>
                                 <Card>
                                 <CardMedia component="img" image={"http://image.tmdb.org/t/p/w500" + movie.poster_path} height='300' width='120'></CardMedia>
