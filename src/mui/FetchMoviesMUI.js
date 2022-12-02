@@ -58,7 +58,7 @@ function FetchMoviesMUI(props) {
             //AMOUNT OF FETCHES DONE, one fetch receives a page with 20 movies
             //---------------------
 
-            let fetchAmount = 1
+            let fetchAmount = 5
 
             //---------------------
             

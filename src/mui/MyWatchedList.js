@@ -1,4 +1,4 @@
-import { Box, Card, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogContent, DialogTitle, Grid, IconButton, Paper, Rating, Typography } from "@mui/material";
+import { Box, Card, CardActions, CardContent, CardHeader, CardMedia, Chip, Dialog, DialogContent, DialogTitle, Grid, IconButton, Paper, Rating, Tooltip, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Outlet} from "react-router-dom";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -93,10 +93,10 @@ function MyWatchedList(props){
                                     <Card sx={{ maxWidth: 200, maxHeight: 1000 }}>
                                         <CardActions>
                                             <Box sx={{width: '100%', display: 'flex', justifyContent: 'center'}}>
-                                            <IconButton sx={{ width: '20%'}} onClick={() => deleteMovie(movie.id)}><DeleteForeverIcon></DeleteForeverIcon></IconButton>
-                                                <IconButton sx={{ width: '20%', marginLeft: '20%', marginRight: '20%' }} variant='link' href={'/addtolist/' + movie.id +
-                                                    '/' + movie.title + '/' + movie.img + '/' + movie.genres + '/' + movie.watched.getFullYear() + '/' + movie.watched.getMonth() + '/' + movie.watched.getDate() + '/' + movie.rating + '/' + movie.review}><EditIcon></EditIcon></IconButton>
-                                            <IconButton sx={{ width: '20%'}} onClick={() => handleOpen(movie.review)}><ReviewsIcon></ReviewsIcon></IconButton>
+                                            <Tooltip title="Delete"><IconButton sx={{ width: '20%'}} onClick={() => deleteMovie(movie.id)}><DeleteForeverIcon></DeleteForeverIcon></IconButton></Tooltip>
+                                            <Tooltip title="Edit"><IconButton sx={{ width: '20%', marginLeft: '20%', marginRight: '20%' }} variant='link' href={'/addtolist/' + movie.id +
+                                                '/' + movie.title + '/' + movie.img + '/' + movie.genres + '/' + movie.watched.getFullYear() + '/' + movie.watched.getMonth() + '/' + movie.watched.getDate() + '/' + movie.rating + '/' + movie.review}><EditIcon></EditIcon></IconButton></Tooltip>
+                                            <Tooltip title="View Review"><IconButton sx={{ width: '20%'}} onClick={() => handleOpen(movie.review)}><ReviewsIcon></ReviewsIcon></IconButton></Tooltip>
                                             </Box>
                                         </CardActions>
                                     
