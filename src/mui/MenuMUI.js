@@ -10,6 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link, Outlet} from 'react-router-dom';
 import { AppBar, Card, CardActions, Grid} from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
+import TheatersIcon from '@mui/icons-material/Theaters';
 
 //Menu tab/function used in every page, needs work
 function MenuMUI() {
@@ -22,7 +23,7 @@ function MenuMUI() {
 
     return(
         <Box>
-            <AppBar position='static'>
+            <AppBar position='sticky'>
             <IconButton onClick={ handleOpen }><MenuIcon color='secondary' sx={{fontSize:40}}></MenuIcon></IconButton>
             <Drawer anchor='top' open={ open } onClick={ handleClose }>
                 <Grid container spacing={4} sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 2}}>
@@ -50,8 +51,8 @@ function MenuMUI() {
                         <Card sx={{maxWidth: 200}}>
                             <CardActions>
                                 <ListItemButton component={Link} to="home/watchlist">
-                                    <ListItemIcon><ListIcon color='primary' /></ListItemIcon>
-                                    <ListItemText primary='My list' />
+                                    <ListItemIcon><TheatersIcon color="primary"></TheatersIcon></ListItemIcon>
+                                    <ListItemText primary='My history' />
                                 </ListItemButton>
                             </CardActions>
                         </Card>

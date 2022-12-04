@@ -136,7 +136,7 @@ function DisplayRecommendations(props) {
                                 </Card>
                             </Grid>
                             <Grid item>
-                                <Card sx={{width: 600, height: 300}}>
+                                <Card sx={{width: 600, height: 300, overflow: 'auto'}}>
                                     <CardContent>
                                         <Typography variant="h4">{movie.title}</Typography>
                                         <Typography>{movie.overview}</Typography>
@@ -159,7 +159,10 @@ function DisplayRecommendations(props) {
                                     </AccordionSummary>
                                     <AccordionDetails>
                                     {movie.provider.buy.map(buy => {
-                                        return (<Typography key={buy.provider_id}>{buy.provider_name}</Typography>)
+                                        return (<Box key={buy.provider_id}>
+                                                    <Box sx={{float:'left'}} component="img" height="20px" src={"http://image.tmdb.org/t/p/w500" + buy.logo_path}></Box>
+                                                    <Typography sx={{paddingBottom: 1, paddingLeft: 3}}>{buy.provider_name}</Typography>
+                                                </Box>)
                                     })}
                                     </AccordionDetails>
                                 </Accordion>    
@@ -178,7 +181,10 @@ function DisplayRecommendations(props) {
                                     </AccordionSummary>
                                     <AccordionDetails>
                                     {movie.provider.buy.map(rent => {
-                                        return (<Typography key={rent.provider_id}>{rent.provider_name}</Typography>)
+                                        return (<Box key={rent.provider_id}>
+                                            <Box sx={{float:'left'}} component="img" height="20px" src={"http://image.tmdb.org/t/p/w500" + rent.logo_path}></Box>
+                                            <Typography sx={{paddingBottom: 1, paddingLeft: 3}}>{rent.provider_name}</Typography>
+                                        </Box>)
                                     })}
                                     </AccordionDetails>
                                 </Accordion>
@@ -197,7 +203,10 @@ function DisplayRecommendations(props) {
                                     </AccordionSummary>
                                     <AccordionDetails>
                                     {movie.provider.buy.map(flatrate => {
-                                        return (<Typography key={flatrate.provider_id}>{flatrate.provider_name}</Typography>)
+                                        return (<Box key={flatrate.provider_id}>
+                                            <Box sx={{float:'left'}} component="img" height="20px" src={"http://image.tmdb.org/t/p/w500" + flatrate.logo_path}></Box>
+                                            <Typography sx={{paddingBottom: 1, paddingLeft: 3}}>{flatrate.provider_name}</Typography>
+                                        </Box>)
                                     })}
                                     </AccordionDetails>
                                 </Accordion>

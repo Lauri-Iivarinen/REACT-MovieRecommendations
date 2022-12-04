@@ -123,7 +123,7 @@ function FetchMoviesMUI(props) {
                     </Box>
                 </Paper>
             {/* MAP ALL MOVIES FETCHED FROM API, FILTER WILL BE APPLIED TO SHOW ONLY CORRECT MOVIES*/}
-                <Paper>
+                <Paper sx={{height: 600, overflow: 'auto', marginLeft: 5, marginRight: 5, marginTop: 1}}>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
