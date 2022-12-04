@@ -4,6 +4,7 @@ import { Outlet} from "react-router-dom";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ReviewsIcon from '@mui/icons-material/Reviews';
 import EditIcon from '@mui/icons-material/Edit';
+require('dotenv').config()
 
 
 //USERS PERSONAL WATCHLIST FOR MOVIES THEY HAVE ALREADY SEEN
