@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "serve -s build",
-    "build": "npm run build",
+    "build": "react-sripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
