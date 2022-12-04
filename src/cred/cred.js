@@ -1,4 +1,4 @@
-import {} from 'dotenv/config'
+//import {} from 'dotenv/config'
 
 //hidden with gitignore during production
 function getCreds() {
