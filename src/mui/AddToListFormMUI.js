@@ -27,7 +27,10 @@ function AddToListFormMUI(props) {
         img: img,
         genres: genres
     })
-    const host = 'http://localhost:8080/'
+
+    const local = 'http://localhost:8080/'
+    const server = 'https://movierecommendations-rest.herokuapp.com/'
+    const host = server
 
 
     //Date

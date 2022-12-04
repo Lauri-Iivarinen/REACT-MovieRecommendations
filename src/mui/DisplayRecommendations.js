@@ -20,6 +20,8 @@ function DisplayRecommendations(props) {
     const [fade, setFade] = useState(false) //for cool fade effect
 
     const local = 'http://localhost:8080/'
+    const server = 'https://movierecommendations-rest.herokuapp.com/'
+    const host = server
 
     //cuts down the amount of recommendations to 3 and fetches watch providers for them
     const generateRecommendation = async(result) => {
@@ -96,7 +98,7 @@ function DisplayRecommendations(props) {
     //get ids of all movies in watch history
     const getMyList = async () => {
         try {
-            const connection = await fetch(local + 'all-id')
+            const connection = await fetch(host + 'all-id')
             const json = await connection.json()
             //change from json to array for easy handling
             let array = []

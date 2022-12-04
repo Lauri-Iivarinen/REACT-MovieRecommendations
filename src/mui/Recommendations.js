@@ -7,12 +7,15 @@ import DisplayRecommendations from './DisplayRecommendations'
 function Recommendations() {
     const [status, setStatus] = useState('waiting')
     const [id, setId] = useState(0)
+
     const local = 'http://localhost:8080/'
+    const server = 'https://movierecommendations-rest.herokuapp.com/'
+    const host = server
 
     //find 3 of the users most rated movies
     const fetchTop3 = async () => {
         try {
-            const response = await axios.get(local + 'topthree')
+            const response = await axios.get(host + 'topthree')
             const json = await response.data
             //pick one movie randomly from top 3
             const id = (json) => {
