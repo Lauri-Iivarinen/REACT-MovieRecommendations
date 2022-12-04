@@ -1,4 +1,5 @@
-require('dotenv').config()
+import React from "react";
+import {} from 'dotenv/config'
 
 //hidden with gitignore during production
 function getCreds() {
