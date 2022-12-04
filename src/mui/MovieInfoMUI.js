@@ -4,12 +4,11 @@ import { Link, Outlet,useParams } from "react-router-dom";
 import getCreds from "../cred/cred";
 
 //Fetches extra information from a certain movie (with use parameter 'id')
-function MovieInfoMUI(){
+function MovieInfoMUI(props){
 
-        let { id } = useParams()
-        const credentials = getCreds()
-
-    //gets API credentials from files
+    let { id } = useParams()
+    const credentials = getCreds() //gets API credentials from files
+    const returnUrl = props.returnUrl
 
     const [errorState, setErrorState] = useState("waiting")
 
@@ -70,6 +69,16 @@ function MovieInfoMUI(){
         return e.slice(1)
     }
 
+    //change list of genre objects to list of genre ids
+    const getGenres = (genres) => {
+        let list = []
+        genres.forEach(genre => {
+            list.push(genre.id)
+        })
+            
+        return list
+    }
+
     if(errorState.length===0){
         return(
             <Box>
@@ -91,8 +100,8 @@ function MovieInfoMUI(){
                                     <Typography>{getRuntime(movie.runtime)} minutes</Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button component={Link} to='../listaa'>Return</Button>
-                                    <Button component={Link} to={'../addtolist/'+movie.id+'/'+movie.title+'/'+getImage(movie.poster_path)+'/'+movie.genres}>Add to watched</Button>
+                                    <Button component={Link} to={returnUrl}>Return</Button>
+                                    <Button component={Link} to={'../addtolist/'+movie.id+'/'+movie.title+'/'+getImage(movie.poster_path)+'/'+getGenres(movie.genres)}>Add to watched</Button>
                                 </CardActions>
                             </Card>
                         </Grid>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box,Button,Paper,TextField, Typography} from "@mui/material";
+import { Box,Button,Paper,TextField, Typography, CircularProgress} from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -58,7 +58,7 @@ function FetchMoviesMUI(props) {
             //AMOUNT OF FETCHES DONE, one fetch receives a page with 20 movies
             //---------------------
 
-            let fetchAmount = 5
+            let fetchAmount = 10
 
             //---------------------
             
@@ -176,8 +176,9 @@ function FetchMoviesMUI(props) {
     } else {
         //only returns this if fetchUrl fails
         return (
-            <Box>
-                {errorState}
+            <Box sx={{display: 'flex', justifyContent: 'center'}}>
+                <CircularProgress></CircularProgress>
+                <Typography>{errorState}</Typography>
                 <Outlet></Outlet>
             </Box>
         )

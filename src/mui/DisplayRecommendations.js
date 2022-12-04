@@ -1,7 +1,12 @@
-import { Box, Card, CardContent, CardHeader, CardMedia, Grid, Paper, Typography, Zoom } from '@mui/material';
+import { Box, Button, Card, CardActions, CardContent, CardMedia,CircularProgress, Grid, Paper, Typography, Zoom } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import getCreds from "../cred/cred";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
 
 function DisplayRecommendations(props) {
     //gets credentials for API (saved on pc, not gh)
@@ -20,7 +25,6 @@ function DisplayRecommendations(props) {
     const generateRecommendation = async(result) => {
         const recommended = [] //will be added to movies
         const idArray = [] //array of ids (in recommended) for easy check
-
         //add 3 movies
         while (recommended.length < 3) {
             //random index
@@ -77,6 +81,7 @@ function DisplayRecommendations(props) {
 
     //searches for a big list of recommendations based on id
     const getRecommendations = async () => {
+        if(myList.length <= 0) return
         try {
             const connection = await fetch('https://api.themoviedb.org/3/movie/' + id + '/recommendations?api_key='+credentials+'&language=en-US&page=1')
             const json = await connection.json()
@@ -107,12 +112,13 @@ function DisplayRecommendations(props) {
 
     }
 
+    useEffect( () =>{getMyList()},[])
+
     useEffect(() => {
-        getMyList()
         getRecommendations()
         setFade(false)
         // eslint-disable-next-line
-    }, [])
+    }, [myList])
 
 
     if (recommendationStatus.length === 0 && myListStatus.length === 0 && watchProviderStatus.length === 0) {
@@ -134,47 +140,70 @@ function DisplayRecommendations(props) {
                                     <CardContent>
                                         <Typography variant="h4">{movie.title}</Typography>
                                         <Typography>{movie.overview}</Typography>
-                                    </CardContent>
+                                        </CardContent>
+                                    <CardActions>
+                                        <Button component={Link} to={"/home/info/" + movie.id}>More info</Button>
+                                    </CardActions>
                                 </Card>
                             </Grid>
+                            <Grid item>
                             {movie.hasBuy &&
-                                <Grid item>
-                                <Card sx={{width: 200, height: 300}}>
-                                    <CardHeader title="BUY"></CardHeader>
-                                    <CardContent>
-                                        {movie.provider.buy.map(buy => {
-                                    return (<Typography key={buy.provider_id}>{buy.provider_name}</Typography>)
-                                })}
-                                    </CardContent>
-                                </Card>
-                                </Grid>
+
+                                <Accordion sx={{width: 300}}>
+                                    <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header"
+                                    >
+                                    <Typography>Buy</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                    {movie.provider.buy.map(buy => {
+                                        return (<Typography key={buy.provider_id}>{buy.provider_name}</Typography>)
+                                    })}
+                                    </AccordionDetails>
+                                </Accordion>    
+
                             }
 
                             {movie.hasRent &&
-                                <Grid item>
-                                <Card sx={{width: 200, height: 300}}>
-                                    <CardHeader title="RENT"></CardHeader>
-                                    <CardContent>
-                                        {movie.provider.rent.map(rent => {
-                                            return (<Typography key={rent.provider_id}>{rent.provider_name}</Typography>)
-                                        })}
-                                    </CardContent>
-                                </Card>
-                                </Grid>
+
+                                <Accordion sx={{width: 300}}>
+                                    <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header"
+                                    >
+                                    <Typography>Rent</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                    {movie.provider.buy.map(rent => {
+                                        return (<Typography key={rent.provider_id}>{rent.provider_name}</Typography>)
+                                    })}
+                                    </AccordionDetails>
+                                </Accordion>
+
                             }
 
                             {movie.hasFlatrate &&
-                                <Grid item>
-                                <Card sx={{width: 200, height: 300}}>
-                                    <CardHeader title="STREAM"></CardHeader>
-                                    <CardContent>
-                                        {movie.provider.flatrate.map(flatrate => {
-                                            return (<Typography key={flatrate.provider_id}>{flatrate.provider_name}</Typography>)
-                                        })}
-                                    </CardContent>
-                                </Card>
-                                </Grid>
+
+                                <Accordion sx={{width: 300}}>
+                                    <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header"
+                                    >
+                                    <Typography>Stream</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                    {movie.provider.buy.map(flatrate => {
+                                        return (<Typography key={flatrate.provider_id}>{flatrate.provider_name}</Typography>)
+                                    })}
+                                    </AccordionDetails>
+                                </Accordion>
+
                             }
+                            </Grid>
                             <Paper color="primary" sx={{height: 1}}></Paper>
                         </Grid>
                         </Zoom>
@@ -182,10 +211,56 @@ function DisplayRecommendations(props) {
                 })}
             </Box>
         )
+        /*
+<Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>Accordion 1</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+            malesuada lacus ex, sit amet blandit leo lobortis eget.
+          </Typography>
+        </AccordionDetails>
+</Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography>Accordion 2</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+            malesuada lacus ex, sit amet blandit leo lobortis eget.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion disabled>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel3a-content"
+          id="panel3a-header"
+        >
+          <Typography>Disabled Accordion</Typography>
+        </AccordionSummary>
+</Accordion>
+        */
     } else {
         //Status gives error
         return (
-            <Typography>{recommendationStatus}{myListStatus}</Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <CircularProgress></CircularProgress>
+                <Typography>{recommendationStatus}</Typography>
+                <Typography>{myListStatus}</Typography>
+                <Typography>{watchProviderStatus}</Typography>
+            </Box>
         )
     }
 

@@ -1,4 +1,4 @@
-import { AppBar, Box, Tab, Tabs, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Tab, Tabs, Toolbar, Typography,CircularProgress, Snackbar } from "@mui/material";
 import React, { useState,useEffect } from "react"
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import GradeIcon from '@mui/icons-material/Grade';
@@ -14,6 +14,12 @@ function MyWatchedTab(props) {
     const [tabNumber, setTabNumber] = useState(0)
     const changeTab = (e, val) => {
         setTabNumber(val)
+    }
+
+    const [deleted, setDeteled] = useState(false)
+
+    const handleClose = () => {
+        setDeteled(false)
     }
 
     //connection status
@@ -47,6 +53,7 @@ function MyWatchedTab(props) {
         try {
             await axios.post('http://localhost:8080/delete', body)
             getMovieListFromUser()
+            setDeteled(true)
         } catch (error) {
             
         }
@@ -54,7 +61,10 @@ function MyWatchedTab(props) {
 
     if (status.length > 0) {
         return (
-            <Typography>{status}</Typography>
+            <Box sx={{fisplay: 'flex', justifyContent: 'center'}}>
+                <CircularProgress></CircularProgress>
+                <Typography>{status}</Typography>
+            </Box>
         )
     } else {
         return (
@@ -63,12 +73,19 @@ function MyWatchedTab(props) {
                     <Toolbar>
                         <Tabs value={tabNumber} onChange={changeTab} sx={{ flexGrow: 1, textAling: 'center' }} textColor='primary' centered variant='fullWidth'>
                             <Tab label="My History" icon={<AutoStoriesIcon color="primary"></AutoStoriesIcon>}></Tab>
-                            <Tab label="Preference details" icon={<GradeIcon color="primary"></GradeIcon>}></Tab>
+                            <Tab label="Statistics" icon={<GradeIcon color="primary"></GradeIcon>}></Tab>
                         </Tabs>
                     </Toolbar>
                 </AppBar>
                 {tabNumber === 0 && <MyWatchedList deleteMovie={(e) => deleteMovie(e)} movies={movies}></MyWatchedList>}
                 {tabNumber === 1 && <PreferenceDetails movies={movies} genres={genres}></PreferenceDetails>}
+                <Snackbar
+                    color="primary"
+                    open={deleted}
+                    autoHideDuration={4000}
+                    onClose={handleClose}
+                    message="Movie deleted!"
+                />
                 <Outlet></Outlet>
             </Box>
         )

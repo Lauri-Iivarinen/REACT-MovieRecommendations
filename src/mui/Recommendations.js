@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Typography } from '@mui/material'
-import { Box } from '@mui/system'
+import { Typography,Box,CircularProgress } from '@mui/material'
 import { Outlet } from 'react-router'
 import DisplayRecommendations from './DisplayRecommendations'
 
@@ -42,7 +41,8 @@ function Recommendations() {
         )
     } else {
         return (
-            <Box>
+            <Box sx={{fisplay: 'flex', justifyContent: 'center'}}>
+                <CircularProgress></CircularProgress>
                 <Typography>{status} {id}</Typography>
                 <Outlet></Outlet>
             </Box>

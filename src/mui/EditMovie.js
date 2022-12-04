@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import axios from 'axios';
 import { Box, Button, Paper, Rating, TextField, Typography } from '@mui/material';
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useParams, useNavigate } from 'react-router-dom';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
@@ -15,6 +15,8 @@ function EditMovie(props) {
     const { id, title, img, genres,year,month,date,rating, review  } = useParams()
     //connection status
     const [status, setStatus] = useState('')
+
+    const navigate = useNavigate()
 
     //change date from useParam form to Date class
     const setDate = (year, month, date) => {
@@ -92,6 +94,7 @@ function EditMovie(props) {
                 genres: genres
             })
             setStatus('success')
+            navigate('/home/watchlist')
         } catch (error) {
             
         }

@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
-import { Box, Card, CardContent, CardMedia, Fade, Grid, Typography } from "@mui/material";
-import {Outlet} from 'react-router-dom';
+import { Box, Button, Card, CardActions, CardContent, CardMedia, CircularProgress, Fade, Grid, Typography } from "@mui/material";
+import {Outlet,Link} from 'react-router-dom';
 import getCreds from "../cred/cred";
 import Recommendations from "./Recommendations";
 
@@ -14,6 +14,7 @@ function AuthenticatedIndexMUI (props){
 
     const [errorState, setErrorState] = useState("waiting...")
     const [fade, setFade] = useState(false)
+    const trending = []
 
     //Use state used for mapping out movies on return
     const [trendingMovies,setTrendingMovies] = useState([{
@@ -23,23 +24,24 @@ function AuthenticatedIndexMUI (props){
         i: 0
     }])
 
-    let trending = []
 
     //fetches trending movies and saves five first results
-    const fetchUrl = async () =>{
+    const fetchUrl = async () => {
+        
         try{
             const connection = await fetch("https://api.themoviedb.org/3/trending/all/day?api_key="+credentials)
             const json = await connection.json()
-            
-            for (let i = 0; i < json.results.length; i++) {
-                if(json.results[i].media_type === "movie"){
-                    trending.push({
-                        img: "http://image.tmdb.org/t/p/w500" + json.results[i].poster_path,
-                        title: json.results[i].title,
-                        id: json.results[i].id,
-                        i: i
-                    })
-                if (trending.length > 4) break
+
+                for (let i = 0; i < json.results.length && trending.length <= 4; i++) {
+                    if(json.results[i].media_type === "movie"){
+                        trending.push({
+                            img: "http://image.tmdb.org/t/p/w500" + json.results[i].poster_path,
+                            title: json.results[i].title,
+                            id: json.results[i].id,
+                            i: i
+                        })
+                        
+                    
                 }
                 
             }
@@ -59,16 +61,18 @@ function AuthenticatedIndexMUI (props){
     if(errorState.length === 0){
         return(
             <Box>
-
                 <Typography variant='h4' sx={{ marginLeft: 6, marginTop: 2 }}>Popular movies now:</Typography>
                 <Fade in={fade} style={{ transitionDelay: fade ? '500ms' : '0ms' }}>
                 <Grid container spacing={3} sx={{margin: 1}}>
                     {trendingMovies.map(trending =>{
                         return(
                             <Grid item key={trending.id}>
-                                <Card  sx={{maxWidth: 200, height:400}}>
+                                <Card  sx={{maxWidth: 200, height:450}}>
                                     <CardMedia component='img' image={trending.img} height='300' width='120'></CardMedia>
-                                    <CardContent>{trending.title}</CardContent>
+                                    <CardContent sx={{height: 100}}>{trending.title}</CardContent>
+                                    <CardActions>
+                                        <Button component={Link} to={"/home/info/" + trending.id}>More info</Button>
+                                    </CardActions>
                                 </Card>
                             </Grid>
                         )
@@ -80,7 +84,7 @@ function AuthenticatedIndexMUI (props){
             </Box>
         )
     } else{
-        return(<Typography>{errorState}</Typography>)
+        return(<Box sx={{display:'flex',justifyContent: 'center'}}><CircularProgress></CircularProgress><Typography>{errorState}</Typography></Box>)
     }
     
 }
