@@ -14,7 +14,6 @@ import MyWatchedTab from "./mui/MyWatchedTab";
 import Recommendations from "./mui/Recommendations";
 import EditMovie from "./mui/EditMovie";
 //import AuthenticationForm from "./components/AuthenticationForm";
-import {} from 'dotenv/config'
 
 /*
 
