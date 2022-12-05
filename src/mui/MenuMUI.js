@@ -40,7 +40,7 @@ function MenuMUI() {
                     <Grid item>
                         <Card sx={{maxWidth: 200}}>
                             <CardActions>
-                                <ListItemButton component={Link} to='listaa'>
+                                <ListItemButton component={Link} to='list'>
                                     <ListItemIcon><ListIcon color='primary' /></ListItemIcon>
                                     <ListItemText primary='Browse' />
                                 </ListItemButton>

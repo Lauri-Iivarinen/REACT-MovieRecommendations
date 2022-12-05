@@ -72,12 +72,7 @@ function App() {
     fontFamily: "'Chakra Petch', sans-serif;"
     },
 });
- /*
-  
 
-    <MenuMUI></MenuMUI>
-    TODO change all endpoints to english-_-
- */
   return (
     <ThemeProvider theme={theme}>
     <CssBaseline />
@@ -85,13 +80,14 @@ function App() {
       <Routes>
         <Route path='/' element={ <MenuMUI /> }>
           <Route index element={ <AuthenticatedIndexMUI></AuthenticatedIndexMUI>} />
-          <Route path='listaa' element={ <FetchMoviesMUI genres={genres}></FetchMoviesMUI> } />
+          <Route path='list' element={ <FetchMoviesMUI genres={genres}></FetchMoviesMUI> } />
           <Route path='home' element={ <AuthenticatedIndexMUI></AuthenticatedIndexMUI> } />
           <Route path='home/watchlist' element={ <MyWatchedTab genres={genres}></MyWatchedTab> } />
-          <Route path='listaa/:id' element={<MovieInfoMUI genres={genres} returnUrl={'../listaa'}></MovieInfoMUI>}></Route>
+          <Route path='listaa/:id' element={<MovieInfoMUI genres={genres} returnUrl={'../list'}></MovieInfoMUI>}></Route>
           <Route path='home/info/:id' element={<MovieInfoMUI genres={genres} returnUrl={'../home'}></MovieInfoMUI>}></Route>
           <Route path='addtolist/:id/:title/:img/:genres' element={<AddToListFormMUI></AddToListFormMUI>}></Route>
           <Route path='addtolist/:id/:title/:img/:genres/:year/:month/:date/:rating/:review' element={<EditMovie></EditMovie>}></Route>
+          <Route path='addtolist/:id/:title/:img/:genres/:year/:month/:date/:rating' element={<EditMovie></EditMovie>}></Route>
           <Route path='recommendations' element={ <Recommendations></Recommendations>} />
           <Route path='*' element={ <Typography>Virhe</Typography> } />
         </Route>

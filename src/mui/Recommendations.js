@@ -3,20 +3,22 @@ import axios from 'axios'
 import { Typography,Box,CircularProgress } from '@mui/material'
 import { Outlet } from 'react-router'
 import DisplayRecommendations from './DisplayRecommendations'
+import Host from '../cred/Host'
 
 function Recommendations() {
     const [status, setStatus] = useState('waiting')
     const [id, setId] = useState(0)
-
-    const local = 'http://localhost:8080/'
-    const server = 'https://movierecommendations-rest.herokuapp.com/'
-    const host = server
+    const host = Host()
 
     //find 3 of the users most rated movies
     const fetchTop3 = async () => {
         try {
             const response = await axios.get(host + 'topthree')
             const json = await response.data
+            if (json.length === 0) {
+                setId(0)
+                setStatus('')
+            }
             //pick one movie randomly from top 3
             const id = (json) => {
                 let index = Math.round(Math.random() * (json.length - 1))

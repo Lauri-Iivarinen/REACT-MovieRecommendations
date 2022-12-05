@@ -94,8 +94,24 @@ function MyWatchedList(props){
                                         <CardActions>
                                             <Box sx={{width: '100%', display: 'flex', justifyContent: 'center'}}>
                                             <Tooltip title="Delete"><IconButton sx={{ width: '20%'}} onClick={() => deleteMovie(movie.id)}><DeleteForeverIcon></DeleteForeverIcon></IconButton></Tooltip>
-                                            <Tooltip title="Edit"><IconButton sx={{ width: '20%', marginLeft: '20%', marginRight: '20%' }} variant='link' href={'/addtolist/' + movie.id +
-                                                '/' + movie.title + '/' + movie.img + '/' + movie.genres + '/' + movie.watched.getFullYear() + '/' + movie.watched.getMonth() + '/' + movie.watched.getDate() + '/' + movie.rating + '/' + movie.review}><EditIcon></EditIcon></IconButton></Tooltip>
+                                                <Tooltip title="Edit">
+                                                    {/* review missing -> edit page doesnt work without correct href*/}
+                                                    {movie.review.length > 0
+                                                        ?<IconButton sx={{ width: '20%', marginLeft: '20%', marginRight: '20%' }}
+                                                            variant='link' href={'/addtolist/' + movie.id +
+                                                            '/' + movie.title + '/' + movie.img + '/' + movie.genres + '/' +
+                                                            movie.watched.getFullYear() + '/' + movie.watched.getMonth() + '/' +
+                                                            movie.watched.getDate() + '/' + movie.rating + '/' + movie.review}><EditIcon></EditIcon>
+                                                            </IconButton>
+                                                        :<IconButton sx={{ width: '20%', marginLeft: '20%', marginRight: '20%' }}
+                                                            variant='link' href={'/addtolist/' + movie.id +
+                                                            '/' + movie.title + '/' + movie.img + '/' + movie.genres + '/' +
+                                                            movie.watched.getFullYear() + '/' + movie.watched.getMonth() + '/' +
+                                                            movie.watched.getDate() + '/' + movie.rating}><EditIcon></EditIcon>
+                                                            </IconButton>
+                                                    }
+                                                    
+                                                </Tooltip>
                                             <Tooltip title="View Review"><IconButton sx={{ width: '20%'}} onClick={() => handleOpen(movie.review)}><ReviewsIcon></ReviewsIcon></IconButton></Tooltip>
                                             </Box>
                                         </CardActions>

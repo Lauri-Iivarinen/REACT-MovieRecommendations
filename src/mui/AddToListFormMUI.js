@@ -7,6 +7,8 @@ import { LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import DateFnsUtils from '@date-io/date-fns';
 import fiLocale from 'date-fns/locale/fi';
+//import getCreds from "../cred/cred";
+import Host from "../cred/Host"
 
 //Form for adding a movie to watchlist, asks user to input watch date, rating and review (optional)
 function AddToListFormMUI(props) {
@@ -16,6 +18,7 @@ function AddToListFormMUI(props) {
     //connection status
     const [status, setStatus] = useState('')
     const navigate = useNavigate();
+    const host = Host()
 
     //console.log(genres)
     const [movie, setMovie] = useState({
@@ -27,10 +30,6 @@ function AddToListFormMUI(props) {
         img: img,
         genres: genres
     })
-
-    const local = 'http://localhost:8080/'
-    const server = 'https://movierecommendations-rest.herokuapp.com/'
-    const host = server
 
 
     //Date

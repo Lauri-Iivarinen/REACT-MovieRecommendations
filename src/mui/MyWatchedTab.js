@@ -6,6 +6,7 @@ import MyWatchedList from "./MyWatchedList";
 import { Outlet } from "react-router-dom";
 import axios from "axios";
 import PreferenceDetails from "./PreferenceDetails";
+import Host from '../cred/Host'
 
 function MyWatchedTab(props) {
     
@@ -28,9 +29,7 @@ function MyWatchedTab(props) {
     const [movies, setMovies] = useState([])
 
     //can be changed easily
-    const local = 'http://localhost:8080/'
-    const server = 'https://movierecommendations-rest.herokuapp.com/'
-    const host = server
+    const host = Host()
 
 
     //search for movies watched by "user (e) and return list of objects"
@@ -51,9 +50,11 @@ function MyWatchedTab(props) {
     
         //TODO add message to confirm deletion/handle error
     const deleteMovie = async (e) => {
+        console.log("delete")
+        console.log(e)
         const body = { id: e }
         try {
-            await axios.post('http://localhost:8080/delete', body)
+            await axios.post(host + 'delete', body)
             getMovieListFromUser()
             setDeteled(true)
         } catch (error) {

@@ -7,6 +7,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
+import Host from "../cred/Host"
 
 function DisplayRecommendations(props) {
     //gets credentials for API (saved on pc, not gh)
@@ -19,9 +20,7 @@ function DisplayRecommendations(props) {
     const [watchProviderStatus, setWatchProviderStatus] = useState('') //status
     const [fade, setFade] = useState(false) //for cool fade effect
 
-    const local = 'http://localhost:8080/'
-    const server = 'https://movierecommendations-rest.herokuapp.com/'
-    const host = server
+    const host = Host()
 
     //cuts down the amount of recommendations to 3 and fetches watch providers for them
     const generateRecommendation = async(result) => {
@@ -114,7 +113,10 @@ function DisplayRecommendations(props) {
 
     }
 
-    useEffect( () =>{getMyList()},[])
+    useEffect(() => {
+        getMyList()
+        // eslint-disable-next-line
+    }, [])
 
     useEffect(() => {
         getRecommendations()
@@ -122,8 +124,13 @@ function DisplayRecommendations(props) {
         // eslint-disable-next-line
     }, [myList])
 
-
-    if (recommendationStatus.length === 0 && myListStatus.length === 0 && watchProviderStatus.length === 0) {
+    if (id === 0) {
+        return (
+            <Box sx={{ paddingTop: 2, marginLeft: 2 }}>
+                <Typography variant="h4">Add movies to your watch history to get recommendations here</Typography>
+            </Box>
+        )
+    }else if (recommendationStatus.length === 0 && myListStatus.length === 0 && watchProviderStatus.length === 0) {
         //Successfull fetches -> render outcome
         return (
             <Box sx={{ paddingTop: 2, marginLeft: 2 }}>
@@ -222,47 +229,6 @@ function DisplayRecommendations(props) {
                 })}
             </Box>
         )
-        /*
-<Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Accordion 1</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-</Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Accordion 2</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion disabled>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3a-content"
-          id="panel3a-header"
-        >
-          <Typography>Disabled Accordion</Typography>
-        </AccordionSummary>
-</Accordion>
-        */
     } else {
         //Status gives error
         return (

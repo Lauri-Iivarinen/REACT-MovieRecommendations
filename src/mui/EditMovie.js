@@ -7,15 +7,16 @@ import { LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import DateFnsUtils from '@date-io/date-fns';
 import fiLocale from 'date-fns/locale/fi';
+import Host from "../cred/Host"
 
 //Form for editing an already existing (in watch history) movie
 function EditMovie(props) {
 
     //gets movies basic info
-    const { id, title, img, genres,year,month,date,rating, review  } = useParams()
+    const { id, title, img, genres,year,month,date,rating,review  } = useParams()
     //connection status
     const [status, setStatus] = useState('')
-
+    const host = Host()
     const navigate = useNavigate()
 
     //change date from useParam form to Date class
@@ -37,10 +38,7 @@ function EditMovie(props) {
         img: img,
         genres: genres
     })
-    
-    const local = 'http://localhost:8080/'
-    const server = 'https://movierecommendations-rest.herokuapp.com/'
-    const host = server
+
 
 
 
