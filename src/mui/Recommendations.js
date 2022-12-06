@@ -6,7 +6,7 @@ import DisplayRecommendations from './DisplayRecommendations'
 import Host from '../cred/Host'
 
 function Recommendations() {
-    const [status, setStatus] = useState('waiting')
+    const [status, setStatus] = useState('LOADING')
     const [id, setId] = useState(0)
     const host = Host()
 
@@ -46,9 +46,9 @@ function Recommendations() {
         )
     } else {
         return (
-            <Box sx={{fisplay: 'flex', justifyContent: 'center'}}>
+            <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <CircularProgress></CircularProgress>
-                <Typography>{status} {id}</Typography>
+                <Typography>{status}</Typography>
                 <Outlet></Outlet>
             </Box>
         )
