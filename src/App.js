@@ -83,7 +83,7 @@ function App() {
           <Route path='list' element={ <FetchMoviesMUI genres={genres}></FetchMoviesMUI> } />
           <Route path='home' element={ <AuthenticatedIndexMUI></AuthenticatedIndexMUI> } />
           <Route path='home/watchlist' element={ <MyWatchedTab genres={genres}></MyWatchedTab> } />
-          <Route path='listaa/:id' element={<MovieInfoMUI genres={genres} returnUrl={'../list'}></MovieInfoMUI>}></Route>
+          <Route path='list/:id' element={<MovieInfoMUI genres={genres} returnUrl={'../list'}></MovieInfoMUI>}></Route>
           <Route path='home/info/:id' element={<MovieInfoMUI genres={genres} returnUrl={'../home'}></MovieInfoMUI>}></Route>
           <Route path='addtolist/:id/:title/:img/:genres' element={<AddToListFormMUI></AddToListFormMUI>}></Route>
           <Route path='addtolist/:id/:title/:img/:genres/:year/:month/:date/:rating/:review' element={<EditMovie></EditMovie>}></Route>
