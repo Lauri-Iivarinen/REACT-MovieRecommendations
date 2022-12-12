@@ -6,7 +6,7 @@ import { createTheme, CssBaseline, ThemeProvider, Typography } from "@mui/materi
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MenuMUI from "./mui/MenuMUI";
 import FetchMoviesMUI from "./mui/FetchMoviesMUI";
-import AuthenticatedIndexMUI from "./mui/AuthenticatedIndexMUI";
+import Index from "./mui/Index";
 import MovieInfoMUI from "./mui/MovieInfoMUI";
 //import MyWatchedList from "./mui/MyWatchedList";
 import AddToListFormMUI from "./mui/AddToListFormMUI";
@@ -59,19 +59,36 @@ function App() {
   //SETS THE THEME FOR THE WEBAPP
 
     //FONT LINK: <link href = "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500&display=swap" rel = "stylesheet" >
-    
+
+  
   const theme = createTheme({
   //primary -> yläpalkki
   palette: {
     primary: { main: '#673ab7', contrastText: '#FFFFFF' },
     secondary: {main: '#FFFFFF', contrastText: '#FFFFFF'},
     text: { primary: '#000000', contrastText: '#FFFFFF'},
-    background: {default: '#FFFFFF'}
+    background: { default: '#FFFFFF' },
   },
   typography: {
     fontFamily: "'Chakra Petch', sans-serif;"
     },
-});
+  });
+  
+// */
+/*
+  const theme = createTheme({
+    //primary -> yläpalkki
+    palette: {
+      primary: { main: '#000000', contrastText: '#000000' },
+      secondary: {main: '#000000', contrastText: '#000000'},
+      text: { primary: '#FFFFFF', contrastText: '#000000'},
+      background: { default: '#000000' },
+    },
+    typography: {
+      fontFamily: "'Chakra Petch', sans-serif;"
+      },
+    });
+// */
 
   return (
     <ThemeProvider theme={theme}>
@@ -79,9 +96,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={ <MenuMUI /> }>
-          <Route index element={ <AuthenticatedIndexMUI></AuthenticatedIndexMUI>} />
+          <Route index element={ <Index></Index> } />
           <Route path='list' element={ <FetchMoviesMUI genres={genres}></FetchMoviesMUI> } />
-          <Route path='home' element={ <AuthenticatedIndexMUI></AuthenticatedIndexMUI> } />
+          <Route path='home' element={ <Index></Index> } />
           <Route path='home/watchlist' element={ <MyWatchedTab genres={genres}></MyWatchedTab> } />
           <Route path='list/:id' element={<MovieInfoMUI genres={genres} returnUrl={'../list'}></MovieInfoMUI>}></Route>
           <Route path='home/info/:id' element={<MovieInfoMUI genres={genres} returnUrl={'../home'}></MovieInfoMUI>}></Route>

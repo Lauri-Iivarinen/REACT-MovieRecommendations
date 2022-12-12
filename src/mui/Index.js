@@ -5,7 +5,7 @@ import getCreds from "../cred/cred";
 import Recommendations from "./Recommendations";
 
 //Index page for users who have successfully authenticated
-function AuthenticatedIndexMUI (props){
+function Index (props){
     
     //gets credentials for API (saved on pc, not gh)
     const credentials = getCreds()
@@ -89,4 +89,4 @@ function AuthenticatedIndexMUI (props){
     
 }
 
-export default AuthenticatedIndexMUI
+export default Index
